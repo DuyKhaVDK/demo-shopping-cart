@@ -6,14 +6,18 @@ import { connect } from "react-redux";
 
 const Navbar = ({ cart }) => {
   const [cartCount, setCartCount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     let count = 0;
+    let price = 0;
     cart.forEach((item) => {
       count += item.qty;
+      price += item.qty * item.price;
     });
 
     setCartCount(count);
+    setTotalPrice(price);
   }, [cart, cartCount]);
 
   return (
@@ -33,6 +37,7 @@ const Navbar = ({ cart }) => {
             src="https://www.prodraw.net/favicon/download.php?file=y2hlt1s3_3.ico"
             alt="shopping cart"
           />
+              <span> {totalPrice} ₫ </span>
           <div className={styles.cart__counter}>{cartCount}</div>
         </div>
       </Link>
